@@ -208,7 +208,7 @@ JWT_TTL e JWT_TTL_REMEMBER_ME
 [l-Doc-Docker]: doc/docker/README.md
 [l-Lumen]: https://lumen.laravel.com/docs/6.x#server-requirements
 [l-Insomia]: https://insomnia.rest/download
-[l-Insomia-Import]: https://insomnia.rest/run/?label=MaxMilhas%20API&uri=https%3A%2F%2Fraw.githubusercontent.com%2Fjotapepinheiro%2Fvoxus%2Fmain%2Fdoc%2Farquivos%2FInsomnia_export.json
+[l-Insomia-Import]: https://insomnia.rest/run/?label=Max%20CPF&uri=https%3A%2F%2Fraw.githubusercontent.com%2FJotapePinheiroSquadra%2Fmax-cpf%2Fmaster%2Fdoc%2Farquivos%2FInsomnia_export.json
 [l-Composer]: https://getcomposer.org
 [l-Swagger]: https://swagger.io
 [l-JWT]: https://jwt.io
