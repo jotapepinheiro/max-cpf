@@ -1,12 +1,11 @@
-# DOCKER
+# Docker Sail
 > Voltar para [instruções do projeto][l-Doc-Projeto]
 
 ---
-- PHP v7.3.21
-- Mysql v8.0.17
-- Nginx
+- PHP v7.4
+- Mysql v8
 - Redis
-- Redis Web-UI
+- Mailhog
 
 ___ 
 
