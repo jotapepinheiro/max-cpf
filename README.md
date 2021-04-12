@@ -40,7 +40,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ## Como instalar
 
-- Siga as [instruções][l-Doc-Docker] para utilizar o Docker usando o Sail
+- Veja **[AQUI][l-Doc-Docker]** as instruções para utilizar o Docker usando o Sail
 
 ```shell script
 # Instalar todos os pacotes necessários para executar o projeto
