@@ -1,0 +1,35 @@
+name: Laravel
+
+on:
+  push:
+    branches:
+      - test
+      - Homolog
+      - Production
+  pull_request:
+    branches:
+      - Homolog
+      - Production
+
+jobs:
+  test-build:
+    runs-on: ubuntu-latest
+
+    outputs:
+      output1: ${{ steps.step1.outputs.test }}
+      output2: ${{ steps.step2.outputs.test }}
+    steps:
+      - id: step1
+        run: echo "::set-output name=test::hello"
+      - id: step2
+        run: echo "::set-output name=test::world"
+  build:
+    runs-on: ubuntu-latest
+    needs: test-build
+    steps:
+      - name: ✅ ENTREI
+        run: | 
+          echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
+          echo "github.ref " github.ref
+          echo "pull_request " github.event.pull_request.head.ref
+      
