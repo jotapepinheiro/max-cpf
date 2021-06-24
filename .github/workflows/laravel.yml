@@ -50,7 +50,7 @@ jobs:
           echo "pullRequestRef " ${{ github.event.pull_request.head.ref }}
 
       - name: ✅ Deploy on server Homolog
-        if: contains(github.ref, 'Homolog') && github.event.pull_request.merged == 'true'
+        if: contains(github.ref, 'Homolog') && github.event.pull_request.merged == true
         run: |
           echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
           echo "github.ref " ${{ github.ref }}
@@ -58,7 +58,7 @@ jobs:
           echo "pullRequestRef " ${{ github.event.pull_request.head.ref }}
 
       - name: ✅ Deploy on server Production
-        if: contains(github.ref, 'Production') && github.event.pull_request.merged == 'true'
+        if: contains(github.ref, 'Production') && github.event.pull_request.merged == true
         run: |
           echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
           echo "github.ref " ${{ github.ref }}
