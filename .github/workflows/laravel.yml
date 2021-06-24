@@ -2,9 +2,13 @@ name: Laravel
 
 on:
   push:
-    branches: [ test ]
+    branches:
+      - test
   pull_request:
-    branches: [ test, Homolog, Production ]
+    branches:
+      - test
+      - Homolog
+      - Production
     types: [ closed ]
 
 jobs:
