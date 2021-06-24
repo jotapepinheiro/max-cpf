@@ -5,7 +5,7 @@ on:
     branches: [ test, Homolog, Production ]
   pull_request:
     branches: [ test, Homolog, Production ]
-    types: [ assigned, opened, closed, synchronize, reopened ]
+    types: [ closed ]
 
 jobs:
   test-build:
@@ -24,14 +24,21 @@ jobs:
     needs: test-build
     steps:
 
-      - name: Checkout repo
+      - name: 🚚 Checkout repo
         uses: actions/checkout@v2
+        if: ${{ github.event_name != 'pull_request' }}
+
+      - name: 🚚 Checkout repo pull_request
+        uses: actions/checkout@v2
+        if: ${{ github.event_name == 'pull_request' }}
+        with:
+          ref: ${{ github.event.pull_request.head.sha }}
 
       - name: 🚚 is Homolog ou Production
         if:
           contains('
-          refs/heads/Homolog
-          refs/heads/Production
+          Homolog
+          Production
           ', github.ref)
         run: |
           echo "github.ref " ${{ github.ref }}
@@ -45,7 +52,7 @@ jobs:
           echo "pullRequestRef " ${{ github.event.pull_request.head.ref }}
 
       - name: ✅ Deploy on server Test
-        if: github.ref == 'refs/heads/test'
+        if: contains(github.ref, 'test')
         run: |
           echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
           echo "github.ref " ${{ github.ref }}
@@ -53,7 +60,7 @@ jobs:
           echo "pullRequestRef " ${{ github.event.pull_request.head.ref }}
 
       - name: ✅ Deploy on server Homolog
-        if: github.ref == 'refs/heads/Homolog'
+        if: contains(github.ref, 'Homolog')
         run: |
           echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
           echo "github.ref " ${{ github.ref }}
@@ -61,7 +68,7 @@ jobs:
           echo "pullRequestRef " ${{ github.event.pull_request.head.ref }}
 
       - name: ✅ Deploy on server Production
-        if: github.ref == 'refs/heads/Production'
+        if: contains(github.ref, 'Production')
         run: |
           echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
           echo "github.ref " ${{ github.ref }}
