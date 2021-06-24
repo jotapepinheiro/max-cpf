@@ -4,8 +4,8 @@ on:
   push:
     branches: [ test, Homolog, Production ]
   pull_request:
-    branches: [ Homolog, Production ]
-    types: [ assigned, opened, synchronize, reopened ]
+    branches: [ test, Homolog, Production ]
+    types: [ assigned, opened, closed, synchronize, reopened ]
 
 jobs:
   test-build:
