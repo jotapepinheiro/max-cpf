@@ -2,7 +2,7 @@ name: Laravel
 
 on:
   push:
-    branches: [ test, Homolog, Production ]
+    branches: [ test ]
   pull_request:
     branches: [ test, Homolog, Production ]
     types: [ closed ]
@@ -10,7 +10,6 @@ on:
 jobs:
   test-build:
     runs-on: ubuntu-latest
-
     outputs:
       output1: ${{ steps.step1.outputs.test }}
       output2: ${{ steps.step2.outputs.test }}
@@ -19,31 +18,22 @@ jobs:
         run: echo "::set-output name=test::hello"
       - id: step2
         run: echo "::set-output name=test::world"
+
   build:
     runs-on: ubuntu-latest
     needs: test-build
     steps:
-
       - name: 🚚 Checkout repo
         uses: actions/checkout@v2
         if: ${{ github.event_name != 'pull_request' }}
 
-      - name: 🚚 Checkout repo pull_request
+      - name: 🚚 Checkout repo pull request
         uses: actions/checkout@v2
         if: ${{ github.event_name == 'pull_request' }}
         with:
           ref: ${{ github.event.pull_request.head.sha }}
 
-      - name: 🚚 is Homolog ou Production
-        if:
-          contains('
-          Homolog
-          Production
-          ', github.ref)
-        run: |
-          echo "github.ref " ${{ github.ref }}
-
-      - name: 🎉 By Pull Request Merged
+      - name: 🎉 Log
         run: |
           echo "eventName " ${{ github.event_name }}
           echo "eventAction " ${{ github.event.action }}
@@ -60,7 +50,7 @@ jobs:
           echo "pullRequestRef " ${{ github.event.pull_request.head.ref }}
 
       - name: ✅ Deploy on server Homolog
-        if: contains(github.ref, 'Homolog')
+        if: contains(github.ref, 'Homolog') && github.event.pull_request.merged == 'true'
         run: |
           echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
           echo "github.ref " ${{ github.ref }}
@@ -68,7 +58,7 @@ jobs:
           echo "pullRequestRef " ${{ github.event.pull_request.head.ref }}
 
       - name: ✅ Deploy on server Production
-        if: contains(github.ref, 'Production')
+        if: contains(github.ref, 'Production') && github.event.pull_request.merged == 'true'
         run: |
           echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
           echo "github.ref " ${{ github.ref }}
