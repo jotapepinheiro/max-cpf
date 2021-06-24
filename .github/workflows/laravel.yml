@@ -30,6 +30,6 @@ jobs:
       - name: ✅ ENTREI
         run: | 
           echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
-          echo "github.ref " github.ref
-          echo "pull_request " github.event.pull_request.head.ref
+          echo "github.ref " ${{ github.ref }}
+          echo "pull_request " ${{ github.event.pull_request.head.ref}}
       
