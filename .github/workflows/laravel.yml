@@ -38,29 +38,34 @@ jobs:
           echo "github.ref " ${{ github.ref }}
 
       - name: 🎉 By Pull Request Merged
+        uses: actions/checkout@v2
         run: |
-          echo "pull_request " ${{ github.event.pull_request.head.ref }}
-          echo "event_name " ${{ github.event_name }}
-          echo "event.action " ${{ github.event.action }}
-          echo "pull_request merged " ${{ github.event.pull_request.merged }}
+          echo "eventName " ${{ github.event_name }}
+          echo "eventAction " ${{ github.event.action }}
+          echo "is_merged " ${{ github.event.pull_request.merged }}
+          echo "pullRequestSha " ${{ github.event.pull_request.head.sha }}
+          echo "pullRequestRef " ${{ github.event.pull_request.head.ref }}
 
       - name: ✅ Deploy on server Test
         if: github.ref == 'refs/heads/test'
         run: |
           echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
           echo "github.ref " ${{ github.ref }}
-          echo "pull_request " ${{ github.event.pull_request.head.ref}}
+          echo "pullRequestSha " ${{ github.event.pull_request.head.sha }}
+          echo "pullRequestRef " ${{ github.event.pull_request.head.ref }}
 
       - name: ✅ Deploy on server Homolog
         if: github.ref == 'refs/heads/Homolog'
         run: |
           echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
           echo "github.ref " ${{ github.ref }}
-          echo "pull_request " ${{ github.event.pull_request.head.ref}}
+          echo "pullRequestSha " ${{ github.event.pull_request.head.sha }}
+          echo "pullRequestRef " ${{ github.event.pull_request.head.ref }}
 
       - name: ✅ Deploy on server Production
         if: github.ref == 'refs/heads/Production'
         run: |
           echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
           echo "github.ref " ${{ github.ref }}
-          echo "pull_request " ${{ github.event.pull_request.head.ref}}
+          echo "pullRequestSha " ${{ github.event.pull_request.head.sha }}
+          echo "pullRequestRef " ${{ github.event.pull_request.head.ref }}
