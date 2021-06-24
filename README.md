@@ -24,7 +24,7 @@ Produção        | 1.0   | [link][l-Producao]
 
 ---
 
-## Qual o objetivo deste repositório 
+## Qual o objetivo deste repositório
 
 1. Desafio Técnico para a empresa [MaxMilhas][l-MaxMilhas].
 2. Criar uma API para gerenciamento de CPFs.
