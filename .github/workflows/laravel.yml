@@ -2,9 +2,15 @@ name: Laravel
 
 on:
   push:
-    branches: [ test ]
+    branches:
+      - ${{ SPRINT_ATUAL }}
+      - test
   pull_request:
-    branches: [ test, Homolog, Production ]
+    branches:
+      - ${{ SPRINT_ATUAL }}
+      - test
+      - Homolog
+      - Production
     types: [ closed ]
 
 jobs:
@@ -43,6 +49,14 @@ jobs:
 
       - name: ✅ Deploy on server Test
         if: contains(github.ref, 'test')
+        run: |
+          echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
+          echo "github.ref " ${{ github.ref }}
+          echo "pullRequestSha " ${{ github.event.pull_request.head.sha }}
+          echo "pullRequestRef " ${{ github.event.pull_request.head.ref }}
+
+      - name: ✅ Deploy on server ${{ SPRINT_ATUAL }}
+        if: contains(github.ref, ${{ SPRINT_ATUAL }})
         run: |
           echo ${{needs.test-build.outputs.output1}} ${{needs.test-build.outputs.output2}}
           echo "github.ref " ${{ github.ref }}
