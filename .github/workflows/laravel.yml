@@ -37,6 +37,13 @@ jobs:
         run: |
           echo "github.ref " ${{ github.ref }}
 
+      - name: 🎉 By Pull Request Merged
+        run: |
+          echo "pull_request " ${{ github.event.pull_request.head.ref }}
+          echo "event_name " ${{ github.event_name }}
+          echo "event.action " ${{ github.event.action }}
+          echo "pull_request merged " ${{ github.event.pull_request.merged }}
+
       - name: ✅ Deploy on server Test
         if: github.ref == 'refs/heads/test'
         run: |
