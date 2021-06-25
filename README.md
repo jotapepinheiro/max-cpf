@@ -13,7 +13,7 @@ Produção        | 1.0   | [link][l-Producao]
 ---
 
 
-## O que este repositório contém OKOK
+## O que este repositório contém OK
 
 
 1. Controle de permissão de usuários ACL.
