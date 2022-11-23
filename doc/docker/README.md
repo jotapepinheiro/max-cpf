@@ -27,7 +27,7 @@ ___
 > php artisan jwt:secret
 
 - Antes de iniciarmos a execução dos comandos Sail, adicione um alias em seu shell de preferencia.
-> alias sail='bash vendor/bin/sail'
+> alias sail='[ -f sail ] && sh sail || sh vendor/bin/sail'
 
 - Caso não adicione o alias, execute os comandos do sail passando o path completo abaixo
 > ./vendor/bin/sail up -d
